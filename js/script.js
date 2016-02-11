@@ -3,7 +3,7 @@ $(document).ready(function() {
   // экспериментальный массив объектов
   var data = [];
 
-  for(var i=1; i<=1000; i++) {
+  for(var i=1; i<=456; i++) {
     data.push({
       name: 'User ' + i,
       description: 'Description for user ' + i,
@@ -32,23 +32,31 @@ $(document).ready(function() {
     var nextPageBtn   = $('#next');
     var lastPageBtn   = $('#last-page');
 
+// ----------------------------------------------------------------
+//                     Объявление констант
+// ----------------------------------------------------------------
+    
     // количество объектов в массиве
-    var dataItemsCount = data.length;
+    var DATA_ITEMS_COUNT = data.length;
 
     // количество страниц
-    var pagesCount = Math.ceil(dataItemsCount / itemsCount);
+    var PAGES_COUNT = Math.ceil(DATA_ITEMS_COUNT / itemsCount);
+
+// ----------------------------------------------------------------
+//               Построение начального вида пагинации
+// ----------------------------------------------------------------    
 
     // если количество меньше или равняется значению установленного параметра
     // то просто запускаем функцию-обработчик данных и передаем ей исходный массив объектов
-    if(pagesCount <= 1) {
+    if(PAGES_COUNT <= 1) {
       if(typeof dataHandler === 'function') dataHandler(data);
       return;
     }
 
     // если количество страниц не превышает установленное значение в настройках,
     // то просто выводим пейджеры
-    else if(pagesCount <= pagerCount) {
-      for(var i=1; i<=pagesCount; i++) {
+    else if(PAGES_COUNT <= pagerCount) {
+      for(var i=1; i<=PAGES_COUNT; i++) {
         pages.append('<span ' + ((i==1) ? 'class="active"' : '') + '>' + i + '</span>');
       }
     }
@@ -60,7 +68,7 @@ $(document).ready(function() {
       }
       nextPageBtn.addClass('visible');
       // если превышает больше, чем в 2 раза, то активируем и кнопочку "Последняя"
-      if((pagesCount / pagerCount) > 2) {
+      if((PAGES_COUNT / pagerCount) > 2) {
         lastPageBtn.addClass('visible');
       }
     }
@@ -68,7 +76,10 @@ $(document).ready(function() {
     // а в обработчик передаем только первые itemsCount элементов
     if(typeof dataHandler === 'function') dataHandler(data.slice(0, itemsCount));
 
-    // обработчик клика по пейджерам
+// ----------------------------------------------------------------
+//                Обработчик клика по пейджерам
+// ----------------------------------------------------------------
+
     $('#pages').on('click', 'span', function() {
       pageNumber = +$(this).text();
       $(this).addClass('active').siblings('.active').removeClass('active');
@@ -98,13 +109,13 @@ $(document).ready(function() {
 
       // если следующая линейка страниц будет предпоследней,
       // то нет смысла отображать кнопку "Последняя"
-      if(dataItemsCount <= lastPageNumber * itemsCount + pagerCount * itemsCount * 2) {
+      if(DATA_ITEMS_COUNT <= lastPageNumber * itemsCount + pagerCount * itemsCount * 2) {
         lastPageBtn.removeClass('visible');
       }
 
       // если следующая линейка страниц будет последней,
       // то нет смысла отображать кнопочку "Вперед"
-      if(dataItemsCount <= lastPageNumber * itemsCount + pagerCount * itemsCount) {
+      if(DATA_ITEMS_COUNT <= lastPageNumber * itemsCount + pagerCount * itemsCount) {
         $(this).removeClass('visible');
       }
 
@@ -140,9 +151,14 @@ $(document).ready(function() {
       // потому как мы перемещаемся на последнюю линейку пейджеров
       $(this).add('#next').removeClass('visible');
 
-      // вычисляем номера первого и последнего пейджера на последней линейке
-      var lastPagerNumber = Math.ceil(dataItemsCount / itemsCount);
-/*!!*/var firstPagerNumber = Math.floor(dataItemsCount / (itemsCount * pagerCount)) * pagerCount + 1;
+      // количество линеек пейджера
+      var linesPagerCount = Math.ceil(DATA_ITEMS_COUNT / (itemsCount * pagerCount));
+
+      // номер первого пейджера на последней линейке
+      var firstPagerNumber = (linesPagerCount - 1) * pagerCount + 1;
+
+      // номер последнего пейджера на последней линейке равно общему количеству пейджеров
+      var lastPagerNumber = Math.ceil(DATA_ITEMS_COUNT / itemsCount);
 
       // очищаем все пейджеры
       pages.empty();
@@ -155,7 +171,6 @@ $(document).ready(function() {
       // чтобы не вычислять подмассив данных, который нужно передать функции обработчику,
       // просто имитируем клик по последнему пейджеру :)
       pages.find('span:last').trigger('click');
-      
     });
 
 // ----------------------------------------------------------------
@@ -193,7 +208,6 @@ $(document).ready(function() {
 
       // имитируем клик по первому пейджеру
       pages.find('span:first').trigger('click');
-
     });
 
 
@@ -218,11 +232,10 @@ $(document).ready(function() {
       // имитируем клик по первому пейджеру
       pages.find('span:first').trigger('click');
     });
-
   }
 
   // практическое использование функции
-  customPager({data: data, itemsCount: 10, pagerCount: 10, dataHandler: dataHandler});
+  customPager({data: data, itemsCount: 20, pagerCount: 5, dataHandler: dataHandler});
 
   // функция-обработчик данных
   function dataHandler(data) {
