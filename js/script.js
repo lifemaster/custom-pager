@@ -3,7 +3,7 @@ $(document).ready(function() {
   // экспериментальный массив объектов
   var data = [];
 
-  for(var i=1; i<=456; i++) {
+  for(var i=1; i<=1000; i++) {
     data.push({
       name: 'User ' + i,
       description: 'Description for user ' + i,
@@ -186,17 +186,21 @@ $(document).ready(function() {
 
       // если ушли далеко назад (дальше предпоследней линейки пейджеров),
       // то даем возможность перейти в самый конец
-      if(true) {
+      if(PAGES_COUNT - (firstPageNumber - 1) > pagerCount) {
         $('#last-page').addClass('visible');
       }
 
       // если следующая линейка пейджеров будет второй от начала,
       // то прячем кнопку "Первая"
-
+      if(firstPageNumber == pagerCount * 2 + 1) {
+        firstPageBtn.removeClass('visible'); 
+      }
 
       // если следующая линейка будет первой от начала, то прячем
       // кнопочку "Назад"
-
+      if(firstPageNumber == pagerCount + 1) {
+        prevPageBtn.removeClass('visible');
+      }
 
       // показываем pageCount предыдущих пейджеров
       var begin = firstPageNumber - pagerCount;
@@ -235,7 +239,7 @@ $(document).ready(function() {
   }
 
   // практическое использование функции
-  customPager({data: data, itemsCount: 20, pagerCount: 5, dataHandler: dataHandler});
+  customPager({data: data, itemsCount: 15, pagerCount: 10, dataHandler: dataHandler});
 
   // функция-обработчик данных
   function dataHandler(data) {
