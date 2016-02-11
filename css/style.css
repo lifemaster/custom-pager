@@ -1,0 +1,77 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#content-block {
+  width: 1000px;
+  height: 300px;
+  margin: 0 auto;
+  padding: 10px;
+  overflow-y: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+#content-block .content {
+  height: inherit;
+  overflow-y: auto;
+}
+
+#content-block .content p {
+  margin-bottom: 5px;
+}
+
+#pager {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#pager * {
+  display: inline-block;
+  margin: 0 5px;
+  padding: 5px;
+  border-radius: 2px;
+  background: #CCC;
+  cursor: pointer;
+}
+
+#first-page, #prev, #next, #last-page {
+/*display: none;*/
+  visibility: hidden;
+}
+
+#first-page.visible, #prev.visible, #next.visible, #last-page.visible {
+/*display: inline-block;*/
+  visibility: visible;
+} 
+
+#pager *:first-child {
+  margin-left: 0;
+}
+
+#pager *:last-child {
+  margin-right: 0;
+}
+
+#pager #pages {
+  margin: 0;
+  padding: 0;
+  background: none;
+}
+
+#pager #pages span {
+  min-width: 20px;
+}
+
+#pager #pages span.active {
+  background: black;
+  color: #FFF;
+}
