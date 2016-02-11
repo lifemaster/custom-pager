@@ -3,11 +3,59 @@
   padding: 0;
 }
 
+body {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
 #wrapper {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+#controls {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#controls p {
+  margin-bottom: 5px;
+  overflow: hidden;
+  line-height: 25px;
+}
+
+#controls p input[type=text] {
+  width: 50px;
+  height: 10px;
+  margin-left: 10px;
+  padding: 5px;
+  float: right;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+#controls p input[type=text]:focus {
+  outline: none;
+  border-color: #aaa;
+}
+
+#controls p label {
+  float: right;
+}
+
+#controls p:last-child {
+  text-align: center;
+}
+
+#controls p:last-child button {
+  cursor: pointer;
+}
+
+#controls-content {
+  display: inline-block;
+  text-align: left;
 }
 
 #content-block {
@@ -34,7 +82,11 @@
   text-align: center;
 }
 
-#pager * {
+#pager-content {
+  display: inline-block;
+}
+
+#pager-content * {
   display: inline-block;
   margin: 0 5px;
   padding: 5px;

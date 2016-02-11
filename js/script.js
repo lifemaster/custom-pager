@@ -1,20 +1,40 @@
 $(document).ready(function() {
 
-  // экспериментальный массив объектов
-  var data = [];
+  $('#controls-content button').click(function() {
+    var dataItemsCount  = +$('#data-value').val();
+    var itemsCount      = +$('#items-count').val();
+    var pagerCount      = +$('#pager-count').val();
 
-  for(var i=1; i<=1000; i++) {
-    data.push({
-      name: 'User ' + i,
-      description: 'Description for user ' + i,
-    });
-  }
+    var result =  dataItemsCount > 0 && dataItemsCount % 1 === 0 &&
+                  itemsCount     > 0 && itemsCount     % 1 === 0 &&
+                  pagerCount     > 0 && itemsCount     % 1 === 0;
 
-  // data.forEach(function(item, i, arr) {
-  //   $('#content-block .content').append('<p>' + item.name + ' => ' + item.description + '</p>');
-  // });
 
-  function customPager(options = { data: null, pagerCount: 10, itemsCount: 10, dataHandler: null }) {
+    if(result) {
+      // экспериментальный массив объектов
+      var data = [];
+
+      for(var i=1; i<=dataItemsCount; i++) {
+        data.push({
+          name:        'User '                 + i,
+          description: 'Description for user ' + i,
+        });
+      }
+
+      // очищаем блок контента и пейджера
+      $('#content-block .content, #pages').empty();
+
+      // скрываем кнопочки управления
+      $('#first-page, #prev, #next, #last-page').removeClass('visible');
+
+      customPager({data: data, itemsCount: itemsCount, pagerCount: pagerCount, dataHandler: dataHandler});
+    }
+    else {
+      alert('Введите во все поля целые числа больше нуля!');
+    }
+  });
+  
+  function customPager(options) {
     // options => {
     //   data: массив объектов с данными
     //   pagerCount: количество кнопок (default = 10)
@@ -237,9 +257,6 @@ $(document).ready(function() {
       pages.find('span:first').trigger('click');
     });
   }
-
-  // практическое использование функции
-  customPager({data: data, itemsCount: 15, pagerCount: 10, dataHandler: dataHandler});
 
   // функция-обработчик данных
   function dataHandler(data) {

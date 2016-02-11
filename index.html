@@ -9,26 +9,45 @@
 </head>
 <body>
   <div id="wrapper">
+    <div id="controls">
+      <div id="controls-content">
+        <p>
+          <input id="data-value" type=text>
+          <label for="data-value">Количество объектов в массиве:</label>
+        </p>
+        <p>
+          <input id="items-count" type=text>
+          <label for="items-count">Количество объектов на странице:</label>
+        </p>
+        <p>
+          <input id="pager-count" type=text>
+          <label for="pager-count">Количество пейджеров на одной линии:</label>
+        </p>
+        <p><button>Применить</button></p>
+      </div>
+    </div>
     <div id="content-block">
       <div class="content"></div>
     </div>
     <div id="pager">
-      <div id="first-page">Первая</div>
-      <div id="prev">Назад</div>
-      <div id="pages">
-    <!--<span>1</span>
-        <span>2</span>
-        <span>3</span>
-        <span>4</span>
-        <span>5</span>
-        <span>6</span>
-        <span>7</span>
-        <span>8</span>
-        <span>9</span>
-        <span>10</span>-->
+      <div id="pager-content">
+        <div id="first-page">Первая</div>
+        <div id="prev">Назад</div>
+        <div id="pages">
+      <!--<span>1</span>
+          <span>2</span>
+          <span>3</span>
+          <span>4</span>
+          <span>5</span>
+          <span>6</span>
+          <span>7</span>
+          <span>8</span>
+          <span>9</span>
+          <span>10</span>-->
+        </div>
+        <div id="next">Вперед</div>
+        <div id="last-page">Последняя</div>
       </div>
-      <div id="next">Вперед</div>
-      <div id="last-page">Последняя</div>
     </div>
   </div>
 </body>
