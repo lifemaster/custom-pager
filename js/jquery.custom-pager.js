@@ -68,6 +68,8 @@
       for(var i=1; i<=PAGES_COUNT; i++) {
         pages.append('<span ' + ((i==1) ? 'class="active"' : '') + '>' + i + '</span>');
       }
+
+      this.show();
     }
 
     // если же превышает, то активируем кнопочку "Вперед"
@@ -81,6 +83,8 @@
       if(PAGES_COUNT / PAGER_COUNT > 2) {
         lastPageBtn.addClass('visible');
       }
+
+      this.show();
     }
 
     // а в обработчик передаем только первые ITEMS_COUNT элементов

@@ -11,6 +11,13 @@ $(document).ready(function() {
 
 
     if(result) {
+
+      // не допускаем делать больше 10 пейджеров
+      if(pagerCount > 10) {
+        alert('Не надо делать больше 10 пейджеров.\nОни же не влезут :)');
+        return;
+      }
+      
       // экспериментальный массив объектов
       var data = [];
 
@@ -21,11 +28,23 @@ $(document).ready(function() {
         });
       }
 
-      // очищаем блок контента и пейджера
-      $('#content-block .content, .pages').empty();
+      // очищаем блок контента
+      $('#content-block .content').empty();
 
-      // скрываем кнопочки управления
-      $('.first-page, .prev, .next, .last-page').removeClass('visible');
+      // пересоздаем пейджер
+      $('.pager').remove();
+
+      $('#content-block').after(
+        '<div class="pager">\
+          <div class="pager-content">\
+            <div class="first-page">Первая</div>\
+            <div class="prev">Назад</div>\
+            <div class="pages"></div>\
+            <div class="next">Вперед</div>\
+            <div class="last-page">Последняя</div>\
+          </div>\
+        </div>'
+      );
 
       // запускаем плагин custom-pager
       $('.pager').pager({

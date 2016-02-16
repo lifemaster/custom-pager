@@ -64,7 +64,7 @@ h2 {
   float: right;
 }
 #content-block {
-  width: 1300px;
+  width: 1000px;
   height: 300px;
   margin: 0 auto;
   padding: 10px;
@@ -80,6 +80,7 @@ h2 {
   margin-bottom: 5px;
 }
 .pager {
+  display: none;
   margin-top: 20px;
   text-align: center;
 }
